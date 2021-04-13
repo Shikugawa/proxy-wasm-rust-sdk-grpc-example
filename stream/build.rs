@@ -13,11 +13,11 @@
 // limitations under the License.
 
 fn main() {
-  let proto_files = vec!["./protos/helloworld.proto"];
+    let proto_files = vec!["./protos/route_guide.proto"];
 
-  protoc_rust::Codegen::new()
-      .out_dir("./src")
-      .inputs(proto_files)
-      .run()
-      .expect("running protoc failed");
+    protoc_rust::Codegen::new()
+        .out_dir("./src")
+        .inputs(proto_files)
+        .run()
+        .expect("running protoc failed");
 }

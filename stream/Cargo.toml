@@ -1,5 +1,5 @@
 [package]
-name = "grpc_stream"
+name = "stream"
 version = "0.1.0"
 authors = ["Rei Shimizu <Shikugawa@gmail.com>"]
 edition = "2018"
