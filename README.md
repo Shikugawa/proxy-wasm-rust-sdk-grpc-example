@@ -15,5 +15,5 @@ Please start valid service you want to try belongs to [here](https://github.com/
 
 ```
 cargo build -p stream --target wasm32-unknown-unknown
-envoy --config-path run/config-grpc-stream.yaml
+envoy --config-path config/config-grpc-stream.yaml
 ```

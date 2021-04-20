@@ -15,7 +15,7 @@
 mod helloworld;
 
 use helloworld::HelloRequest;
-use log::trace;
+use log::{trace, warn};
 use protobuf::Message;
 use proxy_wasm::traits::*;
 use proxy_wasm::types::*;
@@ -39,8 +39,8 @@ impl HttpContext for GrpcCallTest {
             "test",
             "helloworld.Greeter",
             "SayHello",
-            "",
-            String::from_utf8(message).unwrap().as_mut(),
+            Vec::<(&str, &str)>::new(),
+            Some(message.as_slice()),
             Duration::from_secs(5),
         ) {
             Ok(_) => trace!("success"),
@@ -57,14 +57,10 @@ impl HttpContext for GrpcCallTest {
 }
 
 impl Context for GrpcCallTest {
-    fn on_grpc_receive(&mut self, token_id: u32, response_size: usize) {
-        trace!("{}", token_id.to_string());
-        trace!("{}", response_size.to_string());
-    }
-
-    fn on_grpc_close(&mut self, _token_id: u32, _status_code: u32) {
-        trace!("{}", _token_id.to_string());
-        trace!("{}", _status_code.to_string());
-        self.resume_http_request()
+    fn on_grpc_call_response(&mut self, token_id: u32, status_code: u32, response_size: usize) {
+      warn!("{}", token_id.to_string());
+      warn!("{}", status_code.to_string());
+      warn!("{}", response_size.to_string());
+      self.resume_http_request()
     }
 }
