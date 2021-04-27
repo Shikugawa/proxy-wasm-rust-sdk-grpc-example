@@ -39,7 +39,7 @@ impl HttpContext for GrpcCallTest {
             "test",
             "helloworld.Greeter",
             "SayHello",
-            Vec::<(&str, &str)>::new(),
+            Vec::<(&str, &[u8])>::new(),
             Some(message.as_slice()),
             Duration::from_secs(5),
         ) {
@@ -58,9 +58,9 @@ impl HttpContext for GrpcCallTest {
 
 impl Context for GrpcCallTest {
     fn on_grpc_call_response(&mut self, token_id: u32, status_code: u32, response_size: usize) {
-      warn!("{}", token_id.to_string());
-      warn!("{}", status_code.to_string());
-      warn!("{}", response_size.to_string());
-      self.resume_http_request()
+        warn!("{}", token_id.to_string());
+        warn!("{}", status_code.to_string());
+        warn!("{}", response_size.to_string());
+        self.resume_http_request()
     }
 }
